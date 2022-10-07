@@ -8,6 +8,8 @@
 #pragma once
 
 #include "SFML.hpp"
+#include "State.hpp"
+#include "GameState.hpp"
 
 class Game {
     public:
@@ -19,6 +21,14 @@ class Game {
             return instance;
         }
 
+        // INIT
+        void initWindow();
+        void initState();
+        void initGameState();
+
+        // REMOVER
+        void removeState();
+
         void run();
 
     protected:
@@ -29,4 +39,7 @@ class Game {
         sf::Font _font;
 
         sf::RenderWindow _window;
+
+        std::vector<State *> *_state;
+
 };
