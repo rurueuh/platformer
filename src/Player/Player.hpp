@@ -2,24 +2,22 @@
 ** EPITECH PROJECT, 2022
 ** platformer
 ** File description:
-** GameState
+** Player
 */
 
 #pragma once
 
-#include "State.hpp"
-#include "Player.hpp"
+#include "Entity.hpp"
 
-class GameState : public State {
+class Player : public Entity {
     public:
-        GameState();
-        ~GameState();
+        Player();
+        ~Player() = default;
 
-        void removeState() override;
+        void removeEntity() override;
         void update(const float dt) override;
         void render(sf::RenderTarget &target) override;
 
-        Player _player;
     protected:
     private:
 };

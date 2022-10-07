@@ -8,6 +8,7 @@
 #pragma once
 
 #include "SFML.hpp"
+#include "Entity.hpp"
 
 class State {
     public:
@@ -19,5 +20,6 @@ class State {
         virtual void render(sf::RenderTarget &target) = 0;
 
     protected:
+        std::vector<Entity *> _allEntity = Entity::getAllEntity();
     private:
 };
