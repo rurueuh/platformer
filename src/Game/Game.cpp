@@ -9,15 +9,17 @@
 
 Game::Game()
 {
-    _window.create(sf::VideoMode(1920, 1080), "SPRITE CREATOR!");
-    _window.setFramerateLimit(144);
-
-    _font.loadFromFile("assets/font.ttf");
-
+    this->initWindow();
+    this->initState();
+    this->initGameState();
 }
 
 Game::~Game()
 {
+    while (!this->_state->empty()) {
+        this->removeState();
+    }
+    delete this->_state;
 }
 
 void Game::run()
@@ -37,10 +39,14 @@ void Game::run()
 
 void Game::update()
 {
+    auto *last = _state->back();
+    last->update(0);
 }
 
 void Game::draw()
 {
     _window.clear();
+    auto *last = _state->back();
+    last->render(_window);
     _window.display();
 }

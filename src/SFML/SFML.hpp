@@ -11,3 +11,5 @@
 #include <SFML/Audio.hpp>
 #include <bits/stdc++.h>
 #include "../../lib/lib.hpp"
+
+#define DEBUG(x) std::cout << "DEBUG :" <<  x << std::endl;
