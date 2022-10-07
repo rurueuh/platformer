@@ -8,6 +8,7 @@
 #pragma once
 
 #include "SFML.hpp"
+class Compenant;
 
 class Entity {
     public:
@@ -34,8 +35,10 @@ class Entity {
         static std::vector<Entity *> getAllEntity() { return _allEntity; };
 
         // compenants
+        std::vector<Compenant *> _compenants;
 
         // getters
+        sf::Sprite &getSprite() { return this->_image->sprite; };
 
         // setters
 
