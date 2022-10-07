@@ -12,4 +12,10 @@
 #include <bits/stdc++.h>
 #include "../../lib/lib.hpp"
 
-#define DEBUG(x) std::cout << "DEBUG :" <<  x << std::endl;
+#define DEBUG(x) std::cout << "DEBUG : " <<  x << std::endl;
+#define ERROR(x) throw std::runtime_error((std::string) "ERROR : " + x);
+
+typedef struct {
+    sf::Sprite sprite;
+    sf::Texture texture;
+} image_t;

@@ -10,24 +10,20 @@
 Player::Player() : Entity()
 {
     DEBUG("Player init");
-}
-
-Player::~Player()
-{
-    DEBUG("Player remove");
+    this->initSprite("assets/player.png", {151, 12, 81, 108});
 }
 
 void Player::removeEntity()
 {
+    delete this->_image;
     DEBUG("Player remove");
 }
 
 void Player::update(const float dt)
 {
-    DEBUG("Player update");
 }
 
 void Player::render(sf::RenderTarget &target)
 {
-    DEBUG("Player render");
+    target.draw(this->_image->sprite);
 }
