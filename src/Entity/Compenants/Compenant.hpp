@@ -12,7 +12,7 @@
 
 class Compenant {
     public:
-        Compenant(Entity *entity);
+        Compenant(Entity *entityLink);
         ~Compenant();
 
         virtual void remove() = 0;

@@ -7,7 +7,7 @@
 
 #include "MouvementCompenant.hpp"
 
-MouvementCompenant::MouvementCompenant(Entity *entity) : Compenant(entity)
+MouvementCompenant::MouvementCompenant(Entity *entityLink) : Compenant(entityLink)
 {
     this->initCompenant(true, true, true);
     this->initVariable();

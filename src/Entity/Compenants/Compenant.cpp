@@ -8,9 +8,9 @@
 #include "Compenant.hpp"
 #include "Entity.hpp"
 
-Compenant::Compenant(Entity *entity)
+Compenant::Compenant(Entity *entityLink)
 {
-    this->_entity = entity;
+    this->_entity = entityLink;
 }
 
 Compenant::~Compenant()

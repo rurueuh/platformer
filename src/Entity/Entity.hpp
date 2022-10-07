@@ -15,8 +15,8 @@ class Entity {
         Entity();
         ~Entity();
         // Init
-        void initSprite(const std::string filepath);
-        void initSprite(const std::string filepath, const sf::IntRect rect);
+        void initSprite(const std::string &filepath);
+        void initSprite(const std::string &filepath, const sf::IntRect &rect);
 
         // Remover
         virtual void removeEntity() = 0;

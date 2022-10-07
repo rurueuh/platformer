@@ -7,7 +7,7 @@
 
 #include "Entity.hpp"
 
-void Entity::initSprite(const std::string textureFile)
+void Entity::initSprite(const std::string &textureFile)
 {
     this->_image = new image_t;
     if (!this->_image->texture.loadFromFile(textureFile))
@@ -16,7 +16,7 @@ void Entity::initSprite(const std::string textureFile)
     DEBUG("Entity sprite init");
 }
 
-void Entity::initSprite(const std::string textureFile, const sf::IntRect rect)
+void Entity::initSprite(const std::string &textureFile, const sf::IntRect &rect)
 {
     this->initSprite(textureFile);
     this->_image->sprite.setTextureRect(rect);

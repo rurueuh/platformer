@@ -11,7 +11,7 @@
 
 class MouvementCompenant : public Compenant {
     public:
-        MouvementCompenant(Entity *entity);
+        MouvementCompenant(Entity *entityLink);
         ~MouvementCompenant();
         void remove() override;
 
