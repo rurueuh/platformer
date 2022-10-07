@@ -13,6 +13,7 @@ class Entity {
     public:
         Entity();
         ~Entity();
+        virtual void removeEntity() = 0;
 
         // Functions
         virtual void update(const float dt) = 0;
@@ -24,9 +25,9 @@ class Entity {
 
         // all entitys static lists
         static std::vector<Entity *> _allEntity;
+        static std::vector<Entity *> getAllEntity() { return _allEntity; };
 
         // compenants
-
 
         // getters
 
