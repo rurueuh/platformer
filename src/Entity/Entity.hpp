@@ -13,11 +13,17 @@ class Entity {
     public:
         Entity();
         ~Entity();
+        // Init
+        void initSprite(const std::string filepath);
+        void initSprite(const std::string filepath, const sf::IntRect rect);
+
+        // Remover
         virtual void removeEntity() = 0;
 
         // Functions
         virtual void update(const float dt) = 0;
         virtual void render(sf::RenderTarget &target) = 0;
+
 
         // automatic update template with compenants
         void autoUpdate(const float dt);
@@ -34,5 +40,6 @@ class Entity {
         // setters
 
     protected:
+        image_t *_image;
     private:
 };

@@ -12,7 +12,7 @@
 class Player : public Entity {
     public:
         Player();
-        ~Player();
+        ~Player() = default;
 
         void removeEntity() override;
         void update(const float dt) override;
