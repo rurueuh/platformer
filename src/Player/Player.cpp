@@ -7,12 +7,15 @@
 
 #include "Player.hpp"
 #include "MouvementCompenant.hpp"
+#include "PlayerControllerCompenant.hpp"
 
 Player::Player() : Entity()
 {
     DEBUG("Player init");
     this->initSprite("assets/player.png", {151, 12, 81, 108});
-    this->_compenants.push_back(new MouvementCompenant(this));
+    for (int i = 0; i < 1; i++) {
+        this->_compenants.push_back(new PlayerControllerCompenant(this));
+    }
 }
 
 void Player::removeEntity()
