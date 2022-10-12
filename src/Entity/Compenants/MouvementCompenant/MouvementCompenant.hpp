@@ -19,7 +19,18 @@ class MouvementCompenant : public Compenant {
         void update(const float dt) override;
         void render(sf::RenderTarget &target) override;
 
-        void setMoving(bool moving = true) { this->_isMoving = moving; }
+
+        // getter
+        float getAcceleration() const { return this->_acceleration; }
+        float getDeceleration() const { return this->_deceleration; }
+        sf::Vector2f getVelocity() const { return this->_velocity; }
+        sf::Vector2f getMaxVelocity() const { return this->_maxVelocity; }
+
+        // setter
+        void setMovingX(bool moving = true) { this->_isMovingX = moving; }
+        void setMovingY(bool moving = true) { this->_isMovingY = moving; }
+        void setVelocity(sf::Vector2f velocity) { this->_velocity = velocity; }
+        void addVelocity(sf::Vector2f velocity) { this->_velocity += velocity; }
 
     protected:
     private:
@@ -27,6 +38,7 @@ class MouvementCompenant : public Compenant {
         sf::Vector2f _maxVelocity;
         float _acceleration;
         float _deceleration;
-        bool _isMoving;
+        bool _isMovingX;
+        bool _isMovingY;
         
 };

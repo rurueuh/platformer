@@ -40,7 +40,9 @@ void Game::run()
 void Game::update()
 {
     auto *last = _state->back();
-    last->update(0);
+    static sf::Clock clock; // todo : move clock in state
+    float dt = clock.restart().asSeconds();
+    last->update(dt);
 }
 
 void Game::draw()
