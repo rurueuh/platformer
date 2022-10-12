@@ -34,10 +34,34 @@ void PlayerControllerCompenant::update(const float dt)
 {
     // DEBUG("MouvementCompenant update");
     this->mouvementCompenant->update(dt);
+    bool isMoving = false;
+    bool goUp = sf::Keyboard::isKeyPressed(sf::Keyboard::Z);
+    bool goDown = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+    bool goLeft = sf::Keyboard::isKeyPressed(sf::Keyboard::Q);
+    bool goRight = sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+
+    float speed = this->mouvementCompenant->getAcceleration() * dt;
+    if (goUp) {
+        this->mouvementCompenant->addVelocity(sf::Vector2f(0, -speed));
+        this->mouvementCompenant->setMovingY(true);
+    } else if (goDown) {
+        this->mouvementCompenant->addVelocity(sf::Vector2f(0, speed));
+        this->mouvementCompenant->setMovingY(true);
+    } else {
+        this->mouvementCompenant->setMovingY(false);
+    }
+    if (goLeft) {
+        this->mouvementCompenant->addVelocity(sf::Vector2f(-speed, 0));
+        this->mouvementCompenant->setMovingX(true);
+    } else if (goRight) {
+        this->mouvementCompenant->addVelocity(sf::Vector2f(speed, 0));
+        this->mouvementCompenant->setMovingX(true);
+    } else {
+        this->mouvementCompenant->setMovingX(false);
+    }
 }
 
 void PlayerControllerCompenant::render(sf::RenderTarget &target)
 {
-    // DEBUG("MouvementCompenant render");
     this->mouvementCompenant->render(target);
 }
