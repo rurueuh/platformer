@@ -6,6 +6,10 @@
 */
 
 #include "MouvementCompenant.hpp"
+#include <iomanip>
+#include <cstdint>
+#include <algorithm>
+#include <iostream>
 
 MouvementCompenant::MouvementCompenant(Entity *entityLink) : Compenant(entityLink)
 {
@@ -31,20 +35,13 @@ void MouvementCompenant::initVariable()
 
 void MouvementCompenant::update(const float dt)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
-        this->_entity->getSprite().move(-1, 0);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-        this->_entity->getSprite().move(1, 0);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) {
-        this->_entity->getSprite().move(0, -1);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-        this->_entity->getSprite().move(0, 1);
-    }
-    // DEBUG("MouvementCompenant update");
+    DEBUG("MouvementCompenant update");
+    this->_entity->getSprite().move(0, 1);
+    std::clamp(this->_velocity.x, -this->_maxVelocity.x, this->_maxVelocity.x);
+    std::clamp(this->_velocity.y, -this->_maxVelocity.y, this->_maxVelocity.y);
 }
 
 void MouvementCompenant::render(sf::RenderTarget &target)
 {
-    DEBUG("MouvementCompenant render");
+    // DEBUG("MouvementCompenant render");
 }
