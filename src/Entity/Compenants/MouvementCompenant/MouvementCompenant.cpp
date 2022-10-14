@@ -42,7 +42,6 @@ void MouvementCompenant::update(const float dt)
 {
     this->_velocity.x = std::clamp(this->_velocity.x, -this->_maxVelocity.x, this->_maxVelocity.x);
     this->_velocity.y = std::clamp(this->_velocity.y, -this->_maxVelocity.y, this->_maxVelocity.y);
-    DEBUG("moving : " << this->_isMovingX << " " << this->_isMovingY);
     if (!this->_isMovingX) {
         if (this->_velocity.x > 0) {
             this->_velocity.x -= this->_deceleration * dt;
@@ -65,11 +64,9 @@ void MouvementCompenant::update(const float dt)
                 this->_velocity.y = 0;
         }
     }
-    DEBUG((std::string) "velocity: " + std::to_string(this->_velocity.x) + " " + std::to_string(this->_velocity.y));
     this->_entity->getSprite().move(this->_velocity);
 }
 
 void MouvementCompenant::render(sf::RenderTarget &target)
 {
-    // DEBUG("MouvementCompenant render");
 }

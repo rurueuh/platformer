@@ -9,7 +9,7 @@
 
 void Game::initWindow()
 {
-    this->_window.create(sf::VideoMode(800, 600), "SFML works!");
+    this->_window.create(sf::VideoMode(1920, 1080), "SFML works!");
     this->_window.setFramerateLimit(60);
 }
 

@@ -20,6 +20,7 @@ class Game {
             static Game instance;
             return instance;
         }
+        State *getState() { return this->_state->back(); }
 
         // INIT
         void initWindow();

@@ -32,7 +32,6 @@ void PlayerControllerCompenant::initVariable()
 
 void PlayerControllerCompenant::update(const float dt)
 {
-    // DEBUG("MouvementCompenant update");
     this->mouvementCompenant->update(dt);
     bool isMoving = false;
     bool goUp = sf::Keyboard::isKeyPressed(sf::Keyboard::Z);
