@@ -24,16 +24,16 @@ void GameState::removeState()
     
 void GameState::update(const float dt)
 {
+    this->_map->updateMap();
     for (auto &entity : this->_allEntity) {
         entity->autoUpdate(dt);
     }
-    this->_map->updateMap();
 }
 
 void GameState::render(sf::RenderTarget &target)
 {
+    this->_map->drawMap(target);
     for (auto &entity : this->_allEntity) {
         entity->autoRender(target);
     }
-    this->_map->drawMap(target);
 }
