@@ -10,6 +10,7 @@
 #include "Entity.hpp"
 
 class Player : public Entity {
+    constexpr static int PLAYER_SIZE = 32;
     public:
         Player();
         ~Player() = default;

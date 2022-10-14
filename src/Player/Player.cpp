@@ -12,7 +12,7 @@
 Player::Player() : Entity()
 {
     DEBUG("Player init");
-    this->initSprite("assets/player.png", {151, 12, 81, 108});
+    this->initSprite("assets/player.png", {0, 0, this->PLAYER_SIZE, this->PLAYER_SIZE});
     for (int i = 0; i < 1; i++) {
         this->_compenants.push_back(new PlayerControllerCompenant(this));
     }

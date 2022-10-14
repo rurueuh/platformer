@@ -9,6 +9,7 @@
 
 #include "State.hpp"
 #include "Player.hpp"
+#include "Map.hpp"
 
 class GameState : public State {
     public:
@@ -20,6 +21,7 @@ class GameState : public State {
         void render(sf::RenderTarget &target) override;
 
         Player _player;
+        Map *_map;
     protected:
     private:
 };

@@ -11,6 +11,7 @@ GameState::GameState()
 {
     DEBUG("GameState init");
     this->_allEntity = Entity::getAllEntity();
+    this->_map = new Map(this->_player);
 }
 
 void GameState::removeState()
@@ -26,6 +27,7 @@ void GameState::update(const float dt)
     for (auto &entity : this->_allEntity) {
         entity->autoUpdate(dt);
     }
+    this->_map->updateMap();
 }
 
 void GameState::render(sf::RenderTarget &target)
@@ -33,4 +35,5 @@ void GameState::render(sf::RenderTarget &target)
     for (auto &entity : this->_allEntity) {
         entity->autoRender(target);
     }
+    this->_map->drawMap(target);
 }
