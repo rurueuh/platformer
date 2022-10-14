@@ -34,6 +34,7 @@ void Map::initMap(std::string path, Player &player)
                 tmp.push_back(1);
             else if (line[j] == '2') {
                 player.getSprite().setPosition(j * TILE_SIZE, i * TILE_SIZE);
+                tmp.push_back(2);
             }
         }
         this->_map.push_back(tmp);
