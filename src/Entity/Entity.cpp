@@ -37,10 +37,11 @@ void Entity::addCompenant(Compenant *compenant, CompenantType type)
 
 Compenant *Entity::getCompenant(CompenantType type)
 {
-    for (auto &compenant : this->_compenants) {
-        if (compenant.second == type)
-            return compenant.first;
-    }
+    std::vector<std::pair<Compenant *, CompenantType>>::iterator it = std::find_if(this->_compenants.begin(), this->_compenants.end(), [type](std::pair<Compenant *, CompenantType> compenant) {
+        return compenant.second == type;
+    });
+    if (it != this->_compenants.end())
+        return it->first;
     DEBUG("Compenant not found " + std::to_string(type));
     return nullptr;
 }
