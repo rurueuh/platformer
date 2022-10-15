@@ -11,14 +11,13 @@
 #include "CollisionCompenant.hpp"
 #include "GravityCompenant.hpp"
 #include "Map.hpp"
+#include "Game.hpp"
 
 Player::Player() : Entity()
 {
     DEBUG("Player init");
     this->initSprite("assets/player.png", {0, 0, this->PLAYER_SIZE, this->PLAYER_SIZE});
-    for (int i = 0; i < 1; i++) {
-        this->addCompenant(new PlayerControllerCompenant(this), CompenantType::PLAYER_CONTROLLER_COMPENANT);
-    }
+    this->addCompenant(new PlayerControllerCompenant(this), CompenantType::PLAYER_CONTROLLER_COMPENANT);
     this->addCompenant(new GravityCompenant(this), CompenantType::GRAVITY_COMPENANT);
     this->addCompenant(new CollisionCompenant(this), CompenantType::COLLISION_COMPENANT);
 }
@@ -32,6 +31,11 @@ void Player::removeEntity()
 
 void Player::update(const float dt)
 {
+    CollisionCompenant *collision = static_cast<CollisionCompenant *>(this->getCompenant(CompenantType::COLLISION_COMPENANT));
+    if (collision->checkCollision() == CollisionType::Exit) {
+        DEBUG("Exit");
+        exit(0);
+    }
 }
 
 void Player::render(sf::RenderTarget &target)
