@@ -42,7 +42,7 @@ void MouvementCompenant::initVariable()
 void MouvementCompenant::update(const float dt)
 {
     this->_velocity.x = std::clamp(this->_velocity.x, -this->_maxVelocity.x, this->_maxVelocity.x);
-    this->_velocity.y = std::clamp(this->_velocity.y, -this->_maxVelocity.y, this->_maxVelocity.y);
+    // this->_velocity.y = std::clamp(this->_velocity.y, -this->_maxVelocity.y, this->_maxVelocity.y);
     if (!this->_isMovingX) {
         if (this->_velocity.x > 0) {
             this->_velocity.x -= this->_deceleration * dt;

@@ -9,6 +9,7 @@
 #include "MouvementCompenant.hpp"
 #include "PlayerControllerCompenant.hpp"
 #include "CollisionCompenant.hpp"
+#include "GravityCompenant.hpp"
 #include "Map.hpp"
 
 Player::Player() : Entity()
@@ -18,6 +19,7 @@ Player::Player() : Entity()
     for (int i = 0; i < 1; i++) {
         this->addCompenant(new PlayerControllerCompenant(this), CompenantType::PLAYER_CONTROLLER_COMPENANT);
     }
+    this->addCompenant(new GravityCompenant(this), CompenantType::GRAVITY_COMPENANT);
     this->addCompenant(new CollisionCompenant(this), CompenantType::COLLISION_COMPENANT);
 }
 

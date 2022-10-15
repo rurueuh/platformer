@@ -17,6 +17,8 @@ class PlayerControllerCompenant : public Compenant {
         void remove() override;
         void initVariable() override;
 
+        void jump();
+
         void update(const float dt) override;
         void render(sf::RenderTarget &target) override;
 
