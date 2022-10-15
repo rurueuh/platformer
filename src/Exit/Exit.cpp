@@ -24,6 +24,7 @@ Exit::Exit() : Entity()
 void Exit::removeEntity()
 {
     delete this->_image;
+
     DEBUG("Exit remove");
     this->~Exit();
 }

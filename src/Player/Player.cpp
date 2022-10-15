@@ -33,8 +33,11 @@ void Player::update(const float dt)
 {
     CollisionCompenant *collision = static_cast<CollisionCompenant *>(this->getCompenant(CompenantType::COLLISION_COMPENANT));
     if (collision->checkCollision() == CollisionType::Exit) {
-        DEBUG("Exit");
-        exit(0);
+        Game::getInstance().getWindow().close();
+    } else if (collision->checkCollision() == CollisionType::Spike) {
+        DEBUG("Spike");
+        GameState *gameState = static_cast<GameState *>(Game::getInstance().getState());
+        gameState->reset();
     }
 }
 

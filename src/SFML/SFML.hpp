@@ -32,5 +32,6 @@ namespace CollisionType {
         None = 0,
         Block,
         Exit,
+        Spike,
     };
 }

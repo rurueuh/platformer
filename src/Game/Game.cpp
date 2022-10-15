@@ -27,10 +27,14 @@ void Game::run()
     while (_window.isOpen()) {
         sf::Event event;
         while (_window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 _window.close();
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+                return;
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape){
                 _window.close();
+                return;
+            }
         }
         update();
         draw();

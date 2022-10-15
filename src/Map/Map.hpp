@@ -10,14 +10,15 @@
 #include "SFML.hpp"
 #include "Player.hpp"
 #include "Exit.hpp"
+#include "Spike.hpp"
 
 class Map {
     constexpr static int TILE_SIZE = 32;
     public:
-        Map(Player &player, Exit &exit);
+        Map(Player &player, Exit &exit, std::vector<Spike *> &_spikes);
         ~Map();
 
-        void initMap(std::string path, Player &player, Exit &exit);
+        void initMap(std::string path, Player &player, Exit &exit, std::vector<Spike *> &_spikes);
         void initMapSprite();
         void drawMap(sf::RenderTarget &window);
         void updateMap();

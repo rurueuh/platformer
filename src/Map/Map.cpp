@@ -9,14 +9,14 @@
 #include "Game.hpp"
 #include "CollisionCompenant.hpp"
 
-Map::Map(Player &player, Exit &exit)
+Map::Map(Player &player, Exit &exit, std::vector<Spike *> &_spikes)
 {
     _texture.loadFromFile("assets/map.png");
-    this->initMap("assets/map.txt", player, exit);
+    this->initMap("assets/map.txt", player, exit, _spikes);
     this->initMapSprite();
 }
 
-void Map::initMap(std::string path, Player &player, Exit &exit)
+void Map::initMap(std::string path, Player &player, Exit &exit, std::vector<Spike *> &_spikes)
 {
     std::ifstream file(path);
     std::string line;
@@ -43,6 +43,13 @@ void Map::initMap(std::string path, Player &player, Exit &exit)
                 CollisionCompenant *compenant = dynamic_cast<CollisionCompenant *>(exit.getCompenant(CompenantType::COLLISION_COMPENANT));
                 compenant->setMap(this);
                 tmp.push_back(3);
+            } else if (line[j] == '4'){
+                Spike *spike = new Spike();
+                spike->getSprite().setPosition(j * TILE_SIZE, i * TILE_SIZE);
+                CollisionCompenant *compenant = dynamic_cast<CollisionCompenant *>(spike->getCompenant(CompenantType::COLLISION_COMPENANT));
+                compenant->setMap(this);
+                _spikes.push_back(spike);
+                tmp.push_back(4);
             }
         }
         this->_map.push_back(tmp);
@@ -96,6 +103,8 @@ CollisionType::CollisionType Map::isCollide(sf::FloatRect rect)
         return CollisionType::Block;
     if (this->_map[y][x] == 3 || this->_map[y][x2] == 3 || this->_map[y2][x] == 3 || this->_map[y2][x2] == 3)
         return CollisionType::Exit;
+    if (this->_map[y][x] == 4 || this->_map[y][x2] == 4 || this->_map[y2][x] == 4 || this->_map[y2][x2] == 4)
+        return CollisionType::Spike;
     return CollisionType::None;
 }
 
