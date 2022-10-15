@@ -27,6 +27,8 @@ class GameState : public State {
         Exit *_exit;
         std::vector<Spike *> _spikes;
         Map *_map;
+
+        bool updateEntity = false;
     protected:
     private:
 };

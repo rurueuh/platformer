@@ -21,6 +21,7 @@ class Game {
             return instance;
         }
         State *getState() { return this->_state->back(); }
+        sf::Window &getWindow() { return this->_window; }
 
         // INIT
         void initWindow();

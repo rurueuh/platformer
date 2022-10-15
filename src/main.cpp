@@ -9,7 +9,7 @@
 
 int main()
 {
-    Game &game =  game.getInstance();
+    Game &game = game.getInstance();
     game.run();
     return 0;
 }

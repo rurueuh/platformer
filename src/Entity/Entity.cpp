@@ -27,7 +27,7 @@ Entity::~Entity()
         delete compenant.first;
     }
     // auto remove from list of entity
-    this->_allEntity.erase(std::remove(this->_allEntity.begin(), this->_allEntity.end(), this), this->_allEntity.end());
+    Entity::_allEntity.erase(std::remove(Entity::_allEntity.begin(), Entity::_allEntity.end(), this), Entity::_allEntity.end());
 }
 
 void Entity::addCompenant(Compenant *compenant, CompenantType type)
