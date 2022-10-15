@@ -35,8 +35,9 @@ class Entity {
         static std::vector<Entity *> getAllEntity() { return _allEntity; };
 
         // compenants
-        std::vector<Compenant *> _compenants;
-        inline void addCompenant(Compenant *compenant) { this->_compenants.push_back(compenant); };
+        std::vector<std::pair<Compenant *, CompenantType>> _compenants;
+        void addCompenant(Compenant *compenant, CompenantType type);
+        Compenant *getCompenant(CompenantType type);
 
         // getters
         sf::Sprite &getSprite() { return this->_image->sprite; };

@@ -6,6 +6,7 @@
 */
 
 #include "MouvementCompenant.hpp"
+#include "CollisionCompenant.hpp"
 #include <iomanip>
 #include <cstdint>
 #include <algorithm>
@@ -62,6 +63,15 @@ void MouvementCompenant::update(const float dt)
             this->_velocity.y += this->_deceleration * dt;
             if (this->_velocity.y > 0)
                 this->_velocity.y = 0;
+        }
+    }
+    CollisionCompenant *compenant = (CollisionCompenant *) this->_entity->getCompenant(CompenantType::COLLISION_COMPENANT);
+    if (compenant != nullptr) {
+        if (compenant->checkCollision(sf::FloatRect(this->_velocity.x, this->_velocity.y, 0, 0)) == true) {
+            this->_velocity.x = 0;
+            this->_velocity.y = 0;
+        } else {
+            DEBUG("Collision");
         }
     }
     this->_entity->getSprite().move(this->_velocity);

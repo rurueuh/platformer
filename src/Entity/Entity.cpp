@@ -23,18 +23,33 @@ Entity::~Entity()
     DEBUG("Entity remove");
     // remover of compenants
     for (auto &compenant : this->_compenants) {
-        compenant->remove();
-        delete compenant;
+        compenant.first->remove();
+        delete compenant.first;
     }
     // auto remove from list of entity
     this->_allEntity.erase(std::remove(this->_allEntity.begin(), this->_allEntity.end(), this), this->_allEntity.end());
 }
 
+void Entity::addCompenant(Compenant *compenant, CompenantType type)
+{
+    this->_compenants.push_back({compenant, type});
+}
+
+Compenant *Entity::getCompenant(CompenantType type)
+{
+    for (auto &compenant : this->_compenants) {
+        if (compenant.second == type)
+            return compenant.first;
+    }
+    DEBUG("Compenant not found " + std::to_string(type));
+    return nullptr;
+}
+
 void Entity::autoUpdate(const float dt)
 {
     for (auto &compenant : this->_compenants) {
-        if (compenant->isUpdateable() && compenant->isActive())
-            compenant->update(dt);
+        if (compenant.first->isUpdateable() && compenant.first->isActive())
+            compenant.first->update(dt);
     }
     this->update(dt);
 }
@@ -42,8 +57,8 @@ void Entity::autoUpdate(const float dt)
 void Entity::autoRender(sf::RenderTarget &target)
 {
     for (auto &compenant : this->_compenants) {
-        if (compenant->isDrawable() && compenant->isActive())
-            compenant->render(target);
+        if (compenant.first->isDrawable() && compenant.first->isActive())
+            compenant.first->render(target);
     }
     this->render(target);
 }

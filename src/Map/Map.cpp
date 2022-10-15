@@ -7,6 +7,7 @@
 
 #include "Map.hpp"
 #include "Game.hpp"
+#include "CollisionCompenant.hpp"
 
 Map::Map(Player &player)
 {
@@ -34,6 +35,8 @@ void Map::initMap(std::string path, Player &player)
                 tmp.push_back(1);
             else if (line[j] == '2') {
                 player.getSprite().setPosition(j * TILE_SIZE, i * TILE_SIZE);
+                CollisionCompenant *compenant = (CollisionCompenant *) player.getCompenant(CompenantType::COLLISION_COMPENANT);
+                compenant->setMap(this);
                 tmp.push_back(2);
             }
         }

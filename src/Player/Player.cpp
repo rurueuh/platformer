@@ -8,14 +8,17 @@
 #include "Player.hpp"
 #include "MouvementCompenant.hpp"
 #include "PlayerControllerCompenant.hpp"
+#include "CollisionCompenant.hpp"
+#include "Map.hpp"
 
 Player::Player() : Entity()
 {
     DEBUG("Player init");
     this->initSprite("assets/player.png", {0, 0, this->PLAYER_SIZE, this->PLAYER_SIZE});
     for (int i = 0; i < 1; i++) {
-        this->_compenants.push_back(new PlayerControllerCompenant(this));
+        this->addCompenant(new PlayerControllerCompenant(this), CompenantType::PLAYER_CONTROLLER_COMPENANT);
     }
+    this->addCompenant(new CollisionCompenant(this), CompenantType::COLLISION_COMPENANT);
 }
 
 void Player::removeEntity()
