@@ -46,16 +46,13 @@ void CollisionCompenant::update(const float dt)
     );
 }
 
-bool CollisionCompenant::checkCollision(sf::FloatRect offset)
+CollisionType::CollisionType CollisionCompenant::checkCollision(sf::FloatRect offset)
 {
     if (this->_map == nullptr)
         return CollisionType::None;
     sf::FloatRect rect = this->_shape.getGlobalBounds();
     sf::FloatRect rectWithOffset = {rect.left + offset.left, rect.top + offset.top, rect.width + offset.width, rect.height + offset.height};
-    if (this->_map->isCollide(rectWithOffset) == true) {
-        return CollisionType::Block;
-    }
-    return CollisionType::None;
+    return this->_map->isCollide(rectWithOffset);
 }
 
 void CollisionCompenant::render(sf::RenderTarget &target)

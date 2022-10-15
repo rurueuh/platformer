@@ -11,7 +11,7 @@ GameState::GameState()
 {
     DEBUG("GameState init");
     this->_allEntity = Entity::getAllEntity();
-    this->_map = new Map(this->_player);
+    this->_map = new Map(this->_player, this->_exit);
 }
 
 void GameState::removeState()

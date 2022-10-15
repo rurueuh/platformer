@@ -26,3 +26,11 @@ enum CompenantType {
     MOUVEMENT_COMPENANT,
     GRAVITY_COMPENANT,
 };
+
+namespace CollisionType {
+    enum CollisionType {
+        None = 0,
+        Block,
+        Exit,
+    };
+}
