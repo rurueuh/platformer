@@ -9,14 +9,14 @@
 #include "Game.hpp"
 #include "CollisionCompenant.hpp"
 
-Map::Map(Player &player)
+Map::Map(Player &player, Exit &exit)
 {
     _texture.loadFromFile("assets/map.png");
-    this->initMap("assets/map.txt", player);
+    this->initMap("assets/map.txt", player, exit);
     this->initMapSprite();
 }
 
-void Map::initMap(std::string path, Player &player)
+void Map::initMap(std::string path, Player &player, Exit &exit)
 {
     std::ifstream file(path);
     std::string line;
@@ -35,9 +35,14 @@ void Map::initMap(std::string path, Player &player)
                 tmp.push_back(1);
             else if (line[j] == '2') {
                 player.getSprite().setPosition(j * TILE_SIZE, i * TILE_SIZE);
-                CollisionCompenant *compenant = (CollisionCompenant *) player.getCompenant(CompenantType::COLLISION_COMPENANT);
+                CollisionCompenant *compenant = dynamic_cast<CollisionCompenant *>(player.getCompenant(CompenantType::COLLISION_COMPENANT));
                 compenant->setMap(this);
                 tmp.push_back(2);
+            } else if (line[j] == '3') {
+                exit.getSprite().setPosition(j * TILE_SIZE, i * TILE_SIZE);
+                CollisionCompenant *compenant = dynamic_cast<CollisionCompenant *>(exit.getCompenant(CompenantType::COLLISION_COMPENANT));
+                compenant->setMap(this);
+                tmp.push_back(3);
             }
         }
         this->_map.push_back(tmp);
@@ -78,7 +83,7 @@ void Map::drawMap(sf::RenderTarget &window)
     }
 }
 
-bool Map::isCollide(sf::FloatRect rect)
+CollisionType::CollisionType Map::isCollide(sf::FloatRect rect)
 {
     int x = rect.left / this->TILE_SIZE;
     int y = rect.top / this->TILE_SIZE;
@@ -86,10 +91,12 @@ bool Map::isCollide(sf::FloatRect rect)
     int y2 = (rect.top + rect.height) / this->TILE_SIZE;
 
     if (x < 0 || y < 0 || x2 >= this->_size.y || y2 >= this->_size.x)
-        return true;
+        return CollisionType::Block;
     if (this->_map[y][x] == 1 || this->_map[y][x2] == 1 || this->_map[y2][x] == 1 || this->_map[y2][x2] == 1)
-        return true;
-    return false;
+        return CollisionType::Block;
+    if (this->_map[y][x] == 3 || this->_map[y][x2] == 3 || this->_map[y2][x] == 3 || this->_map[y2][x2] == 3)
+        return CollisionType::Exit;
+    return CollisionType::None;
 }
 
 void Map::updateMap()
