@@ -10,6 +10,13 @@
 #include "Compenant.hpp"
 #include "Map.hpp"
 
+namespace CollisionType {
+    enum CollisionType {
+        None = 0,
+        Block,
+    };
+}
+
 class CollisionCompenant : public Compenant {
     public:
         CollisionCompenant(Entity *entityLink, Map *map = nullptr);
@@ -26,6 +33,6 @@ class CollisionCompenant : public Compenant {
     protected:
     private:
         Map *_map;
-        sf::FloatRect _rect;
         sf::RectangleShape _shape;
+        sf::FloatRect _offset;
 };

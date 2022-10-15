@@ -27,30 +27,35 @@ void CollisionCompenant::remove()
 
 void CollisionCompenant::initVariable()
 {
-    this->_rect = this->_entity->getSprite().getGlobalBounds();
-    this->_shape.setSize(sf::Vector2f(this->_rect.width, this->_rect.height));
+    sf::FloatRect rect = this->_entity->getSprite().getGlobalBounds();
+    this->_offset = sf::FloatRect(2, 2, -4, -4);
+    this->_shape.setSize(sf::Vector2f(rect.width + this->_offset.width, rect.height + this->_offset.height));
     this->_shape.setFillColor(sf::Color::Transparent);
     this->_shape.setOutlineColor(sf::Color::Green);
     this->_shape.setOutlineThickness(1);
-    this->_shape.setPosition(this->_rect.left, this->_rect.top);
+    this->_shape.setPosition(rect.left, rect.top);
 }
 
 void CollisionCompenant::update(const float dt)
 {
-    this->_rect = this->_entity->getSprite().getGlobalBounds();
-    this->_shape.setPosition(this->_rect.left, this->_rect.top);
+    sf::FloatRect rect = this->_entity->getSprite().getGlobalBounds();
+    rect = sf::FloatRect(rect.left + this->_offset.left, rect.top + this->_offset.top, rect.width + this->_offset.width, rect.height + this->_offset.height);
+    this->_shape.setPosition(
+        rect.left,
+        rect.top
+    );
 }
 
 bool CollisionCompenant::checkCollision(sf::FloatRect offset)
 {
     if (this->_map == nullptr)
-        return false;
-
-    sf::FloatRect rectWithOffset = {this->_rect.left + offset.left, this->_rect.top + offset.top, this->_rect.width + offset.width, this->_rect.height + offset.height};
+        return CollisionType::None;
+    sf::FloatRect rect = this->_shape.getGlobalBounds();
+    sf::FloatRect rectWithOffset = {rect.left + offset.left, rect.top + offset.top, rect.width + offset.width, rect.height + offset.height};
     if (this->_map->isCollide(rectWithOffset) == true) {
-        return true;
+        return CollisionType::Block;
     }
-    return false;
+    return CollisionType::None;
 }
 
 void CollisionCompenant::render(sf::RenderTarget &target)

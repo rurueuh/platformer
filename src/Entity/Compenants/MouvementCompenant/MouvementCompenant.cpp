@@ -67,11 +67,9 @@ void MouvementCompenant::update(const float dt)
     }
     CollisionCompenant *compenant = (CollisionCompenant *) this->_entity->getCompenant(CompenantType::COLLISION_COMPENANT);
     if (compenant != nullptr) {
-        if (compenant->checkCollision(sf::FloatRect(this->_velocity.x, this->_velocity.y, 0, 0)) == true) {
+        if (compenant->checkCollision(sf::FloatRect(this->_velocity.x, this->_velocity.y, 0, 0)) == CollisionType::Block) {
             this->_velocity.x = 0;
             this->_velocity.y = 0;
-        } else {
-            DEBUG("Collision");
         }
     }
     this->_entity->getSprite().move(this->_velocity);
