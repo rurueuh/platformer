@@ -10,8 +10,21 @@
 GameState::GameState()
 {
     DEBUG("GameState init");
+    this->_player = new Player();
+    this->_exit = new Exit();
+    this->_map = new Map(*this->_player, *this->_exit, this->_spikes);
     this->_allEntity = Entity::getAllEntity();
-    this->_map = new Map(this->_player, this->_exit);
+}
+
+void GameState::reset()
+{
+    this->_player->removeEntity();
+    // this->_exit->removeEntity();
+    // delete this->_map;
+    this->_player = new Player();
+    this->_exit = new Exit();
+    this->_map = new Map(*this->_player, *this->_exit, this->_spikes);
+    this->_allEntity = Entity::getAllEntity();
 }
 
 void GameState::removeState()
@@ -19,6 +32,7 @@ void GameState::removeState()
     for (auto &entity : this->_allEntity) {
         entity->removeEntity();
     }
+    delete this->_map;
     DEBUG("GameState remove");
 }
     
