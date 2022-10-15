@@ -7,6 +7,7 @@
 
 #include "Map.hpp"
 #include "Game.hpp"
+#include "CollisionCompenant.hpp"
 
 Map::Map(Player &player)
 {
@@ -34,6 +35,8 @@ void Map::initMap(std::string path, Player &player)
                 tmp.push_back(1);
             else if (line[j] == '2') {
                 player.getSprite().setPosition(j * TILE_SIZE, i * TILE_SIZE);
+                CollisionCompenant *compenant = (CollisionCompenant *) player.getCompenant(CompenantType::COLLISION_COMPENANT);
+                compenant->setMap(this);
                 tmp.push_back(2);
             }
         }
@@ -79,7 +82,12 @@ bool Map::isCollide(sf::FloatRect rect)
 {
     int x = rect.left / this->TILE_SIZE;
     int y = rect.top / this->TILE_SIZE;
-    if (this->_map[y][x] == 1 && this->_mapSprite[y][x].getGlobalBounds().intersects(rect))
+    int x2 = (rect.left + rect.width) / this->TILE_SIZE;
+    int y2 = (rect.top + rect.height) / this->TILE_SIZE;
+
+    if (x < 0 || y < 0 || x2 >= this->_size.y || y2 >= this->_size.x)
+        return true;
+    if (this->_map[y][x] == 1 || this->_map[y][x2] == 1 || this->_map[y2][x] == 1 || this->_map[y2][x2] == 1)
         return true;
     return false;
 }

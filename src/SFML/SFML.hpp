@@ -19,3 +19,10 @@ typedef struct {
     sf::Sprite sprite;
     sf::Texture texture;
 } image_t;
+
+enum CompenantType {
+    PLAYER_CONTROLLER_COMPENANT,
+    COLLISION_COMPENANT,
+    MOUVEMENT_COMPENANT,
+    GRAVITY_COMPENANT,
+};
